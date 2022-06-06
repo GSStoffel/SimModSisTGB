@@ -1,5 +1,7 @@
 package src;
 
+import java.util.Random;
+
 public class Scheduler {
     private double time;
 
@@ -41,13 +43,37 @@ public class Scheduler {
 
     public EntitySet getEntitySet(int id){ return null; }
 
-    // random
+    public double uniform(double minValue, double maxValue){
+        return minValue + (minValue - maxValue) * new Random().nextDouble();
+    }
 
-    public double uniform(double minValue, double maxValue){ return 0; }
+    public double exponential(double meanValue){
+        return new Random().nextDouble();
+    }
 
-    public double exponential(double meanValue){ return 0; }
+    public double normal(double meanValue, double stdDeviationValue){
+        double w = 2;
+        double result = 0;
 
-    public double normal(double meanValue, double stdDeviationValue){ return 0; }
+        while(w > 1) {
+            double u1 = new Random().nextGaussian();
+            double u2 = new Random().nextGaussian();
+
+            double v1 = 2 * u1 - 1;
+            double v2 = 2 * u2 - 2;
+
+            w = v1*v1 + v2*v2;
+
+            double y = Math.sqrt((-2 * Math.log(w) / w));
+
+            double x1 = v1 * y;
+
+            if(w <= 1) {
+                result = meanValue + x1 * stdDeviationValue;
+            }
+        }
+        return result;
+    }
 
     // coleta de estatisticas
 
