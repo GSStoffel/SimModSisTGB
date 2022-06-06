@@ -5,9 +5,7 @@ import java.util.Random;
 public class Scheduler {
     private double time;
 
-    public double getTime() {
-        return time;
-    }
+    public double getTime() { return time; }
 
     public void startProcessNow(int processId){}
 
@@ -43,12 +41,14 @@ public class Scheduler {
 
     public EntitySet getEntitySet(int id){ return null; }
 
+    // random
+
     public double uniform(double minValue, double maxValue){
-        return minValue + (minValue - maxValue) * new Random().nextDouble();
+        return new Random().nextDouble();
     }
 
     public double exponential(double meanValue){
-        return new Random().nextDouble();
+        return meanValue*Math.log(1-new Random().nextDouble());
     }
 
     public double normal(double meanValue, double stdDeviationValue){
