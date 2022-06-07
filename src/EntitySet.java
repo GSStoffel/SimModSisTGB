@@ -47,7 +47,7 @@ public class EntitySet {
     }
 
     // TODO: implementar
-    private Entity remove(){
+    public Entity remove(){
         if (size > 0){
             switch (mode) {
                 case Mode.FIFO -> {

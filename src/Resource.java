@@ -11,6 +11,10 @@ public class Resource {
         this.quantity = quantity;
     }
 
+    public Resource(int quantity) {
+        this.quantity = quantity;
+    }
+
     // TODO: implementar
     public boolean allocate(int quantity) {
         return true;
