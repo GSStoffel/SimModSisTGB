@@ -15,6 +15,19 @@ public class Entity {
         this.name = name;
         this.petriNet = petriNet;
     }
+    
+    public Entity(String name, PetriNet petriNet, double creationTime) {
+        this.name = name;
+        this.petriNet = petriNet;
+        this.creationTime = creationTime;
+    }
+    
+    public Entity(String name, PetriNet petriNet, double creationTime, int priority) {
+        this.name = name;
+        this.petriNet = petriNet;
+        this.creationTime = creationTime;
+        this.priority = priority;
+    }
 
     public String getName() {
         return name;
@@ -42,5 +55,12 @@ public class Entity {
 
     public void setPetriNet(PetriNet petriNet) {
         this.petriNet = petriNet;
+    }
+    
+    public void toString() {
+        return "Id: " + this.id + " " + 
+            "Name: " + this.name + " " + 
+            "CreationTime: " + this.creationTime + " " + 
+            "Priority: " + this.priority
     }
 }

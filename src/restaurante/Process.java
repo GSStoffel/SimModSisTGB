@@ -2,12 +2,14 @@ package src.restaurante;
 
 public class Process {
 
-    private String name;
     private int processId;
+    private String name;
+    private double startTime;
     private double duration;
     private boolean active;
 
-    public Process(String name, double duration) {
+    public Process(int processId, String name, double duration) {
+        this.processId = processId;
         this.name = name;
         this.duration = duration;
     }
@@ -26,5 +28,17 @@ public class Process {
 
     public void setActive(boolean active) {
         this.active = active;
+    }
+    
+    public void setStartTime(double startTime) {
+        this.startTime = startTime;
+    }
+    
+    public double getStartTime() {
+        return this.startTime;
+    }
+    
+    public double getEndTime() {
+        return this.startTime + this.duration;
     }
 }

@@ -15,13 +15,18 @@ public class Resource {
         this.quantity = quantity;
     }
 
-    // TODO: implementar
     public boolean allocate(int quantity) {
-        return true;
+        if (quantity < this.quantity) {
+            this.quantity -= quantity;
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
-    // TODO: implementar
     public void release(int quantity) {
+        this.quantity += quantity;
     }
 
     // TODO: implementar
@@ -33,5 +38,4 @@ public class Resource {
     public double avarageAllocation() {
         return 0;
     }
-
 }
