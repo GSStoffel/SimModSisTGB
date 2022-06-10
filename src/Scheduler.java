@@ -1,5 +1,7 @@
 package src;
 
+import src.restaurante.Process;
+
 import java.util.Random;
 
 public class Scheduler {

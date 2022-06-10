@@ -1,4 +1,4 @@
-package src;
+package src.restaurante;
 
 public class Process {
 
