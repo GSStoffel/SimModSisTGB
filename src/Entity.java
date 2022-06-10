@@ -56,11 +56,12 @@ public class Entity {
     public void setPetriNet(PetriNet petriNet) {
         this.petriNet = petriNet;
     }
-    
-    public void toString() {
+
+    @Override
+    public String toString() {
         return "Id: " + this.id + " " + 
             "Name: " + this.name + " " + 
             "CreationTime: " + this.creationTime + " " + 
-            "Priority: " + this.priority
+            "Priority: " + this.priority;
     }
 }
