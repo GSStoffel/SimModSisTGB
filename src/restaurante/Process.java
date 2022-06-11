@@ -41,4 +41,12 @@ public class Process {
     public double getEndTime() {
         return this.startTime + this.duration;
     }
+
+    public void executeOnStart(){
+
+    }
+
+    public void executeOnEnd(){
+
+    }
 }
