@@ -1,6 +1,6 @@
 package src.restaurante;
 
-import src.restaurante.Process;
+import src.Process;
 
 public class Comendo extends Process {
 
