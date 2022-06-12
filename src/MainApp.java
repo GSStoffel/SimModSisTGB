@@ -43,5 +43,9 @@ public class MainApp {
         int comendoM2 = r.createProcess("ComendoM1", r.exponential(3), r.getEntitySet(filaM2), r.getResource(mesa2Id));
         int comendoM4 = r.createProcess("ComendoM2", r.exponential(3), r.getEntitySet(filaM4), r.getResource(mesa4Id));
 
+
+
+        r.simulate();
+
     }
 }
