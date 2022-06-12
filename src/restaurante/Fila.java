@@ -4,7 +4,7 @@ import src.EntitySet;
 
 public class Fila extends EntitySet {
 
-    public Fila(String name, int mode, int maxPossibleSize) {
-        super(name, mode, maxPossibleSize);
+    public Fila(int id, String name, int mode, int maxPossibleSize) {
+        super(id, name, mode, maxPossibleSize);
     }
 }
