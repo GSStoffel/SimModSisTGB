@@ -259,4 +259,7 @@ public abstract class DesEngine {
     }
 
     public abstract int createProcess(String name, double duration, EntitySet entitySet, Resource resource);
+
+    // COMENDO
+    public abstract int createProcess(String name, double duration, Entity entity, Resource resource);
 }

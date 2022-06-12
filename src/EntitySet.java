@@ -11,7 +11,6 @@ public class EntitySet {
     private String name;
     private int id;
 
-    private Mode modeEnun;
     private int mode;
 
     private int size;

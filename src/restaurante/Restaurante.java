@@ -27,4 +27,14 @@ public class Restaurante extends DesEngine {
         processes.add(chegada);
         return chegada.getId();
     }
+
+    @Override
+    public int createProcess(String name, double duration, Entity entity, Resource resource) {
+        int processId = super.createProcess(name, duration);
+        Process process = getProcess(processId);
+        Comendo comendo = new Comendo(process.getId(), process.getName(), process.getDuration());
+
+        processes.add(comendo);
+        return comendo.getId();
+    }
 }
