@@ -6,13 +6,13 @@ import java.util.Random;
 
 public class DesEngine {
 
-    private List<Entity> entities = new ArrayList<>();
-    private List<EntitySet> entitysets = new ArrayList<>();
-    private List<Resource> resources = new ArrayList<>();
-    private List<Process> processes = new ArrayList<>();
-    private double time;
-    private double maxTimeSimulate;
-    private boolean simulateOneStep;
+    protected List<Entity> entities = new ArrayList<>();
+    protected List<EntitySet> entitysets = new ArrayList<>();
+    protected List<Resource> resources = new ArrayList<>();
+    protected List<Process> processes = new ArrayList<>();
+    protected double time;
+    protected double maxTimeSimulate;
+    protected boolean simulateOneStep;
 
     public DesEngine() {
         this.time = 0;
@@ -22,19 +22,7 @@ public class DesEngine {
         this.time = time;
     }
 
-    public void simulate(){
-
-        for (Process p : processes) {
-            if (p.isActive() && p.getStartTime() >= time) {
-                p.executeOnStart();
-            }
-
-            if (p.isActive() && p.getEndTime() <= time) {
-                p.executeOnEnd();
-            }
-        }
-
-    }
+    public void simulate(){}
 
     public List<Entity> getEntities() {
         return entities;
