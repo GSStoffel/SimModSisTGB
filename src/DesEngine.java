@@ -122,7 +122,9 @@ public abstract class DesEngine {
     }
 
     public Entity destroyEntity(int id){
-        return entities.remove(getEntity(id));
+        Entity removedEntity = getEntity(id);
+        entities.remove(removedEntity);
+        return removedEntity;
     }
 
     public int createResource(String name, int quantity){

@@ -7,6 +7,7 @@ import src.Resource;
 
 public class Chegada extends Process {
 
+    public  Entity client;
     private EntitySet fila;
     private Resource atendenteCx;
 
@@ -18,7 +19,11 @@ public class Chegada extends Process {
 
     @Override
     public void executeOnStart() {
-
+        if(!fila.isEmpty()){
+            if(atendenteCx.allocate(1)){
+                client = fila.remove();
+            }
+        }
     }
 
     @Override
