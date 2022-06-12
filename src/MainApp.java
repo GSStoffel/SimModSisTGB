@@ -39,7 +39,7 @@ public class MainApp {
         int chegada = r.createProcess("Chegada1", r.exponential(3), new ArrayList<EntitySet>() {{
             add(r.getEntitySet(caixa1));
             add(r.getEntitySet(caixa2));
-        }}, r.getResource(atendenteCx1));
+        }});
 
         int chegadaPedidos = r.createProcess("ChegadaPedidos", r.exponential(3), new ArrayList<EntitySet>() {{
             add(r.getEntitySet(cozinha));

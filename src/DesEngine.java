@@ -269,6 +269,7 @@ public abstract class DesEngine {
         return process.getId();
     }
 
-    public abstract int createProcess(String name, double duration, List<EntitySet> entitySetList, Resource resource);
+    public abstract int createProcess(String name, double duration, List<EntitySet> entitySetList);
 
+    public abstract int createProcess(String name, double duration, List<EntitySet> entitySetList, Resource resource);
 }

@@ -14,12 +14,10 @@ public class Chegada extends Process {
 
     public Entity entity;
     private List<EntitySet> entitySetList;
-    private Resource resource;
 
-    public Chegada(int processId, String name, double duration, List<EntitySet> entitySetList, Resource resource) {
+    public Chegada(int processId, String name, double duration, List<EntitySet> entitySetList) {
         super(processId, name, duration);
         this.entitySetList = entitySetList;
-        this.resource = resource;
     }
 
     @Override

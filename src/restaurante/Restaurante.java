@@ -29,12 +29,17 @@ public class Restaurante extends DesEngine {
     }
 
     @Override
-    public int createProcess(String name, double duration, List<EntitySet> entitySetList, Resource resource) {
+    public int createProcess(String name, double duration, List<EntitySet> entitySetList) {
         int processId = super.createProcess(name, duration);
         Process process = getProcess(processId);
-        Chegada chegada = new Chegada(process.getId(), process.getName(), process.getDuration(), entitySetList, resource);
+        Chegada chegada = new Chegada(process.getId(), process.getName(), process.getDuration(), entitySetList);
         processes.add(chegada);
         return chegada.getId();
+    }
+
+    @Override
+    public int createProcess(String name, double duration, List<EntitySet> entitySetList, Resource resource) {
+        return 0;
     }
 
 }
