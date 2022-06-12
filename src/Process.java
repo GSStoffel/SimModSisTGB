@@ -42,13 +42,9 @@ public class Process {
         return this.startTime + this.duration;
     }
 
-    public void executeOnStart(){
+    public void executeOnStart() {}
 
-    }
-
-    public void executeOnEnd(){
-
-    }
+    public void executeOnEnd(){}
 
     public int getProcessId() {
         return processId;
