@@ -10,12 +10,9 @@ public class EntitySet {
 
     private String name;
     private int id;
-
     private int mode;
-
     private int size;
     private int maxPossibleSize;
-
     private List<Entity> entities;
 
     public EntitySet(int id, String name, int mode, int maxPossibleSize) {
@@ -34,10 +31,10 @@ public class EntitySet {
         this.mode = mode;
     }
 
-    private int getPriorityIndex(){
+    private int getPriorityIndex() {
         int curIndex = 0;
         for (int i = 1; i < size; i++) {
-            if (entities.get(i).getPriority() >= entities.get(curIndex).getPriority()){
+            if (entities.get(i).getPriority() >= entities.get(curIndex).getPriority()) {
                 curIndex = i;
             }
         }
@@ -48,11 +45,11 @@ public class EntitySet {
         return (int) ((Math.random() * (max - min)) + min);
     }
 
-    public Entity remove(){
-        if (size > 0){
+    public Entity remove() {
+        if (size > 0) {
             switch (mode) {
                 case Mode.FIFO -> {
-                    return entities.remove(entities.size()-1);
+                    return entities.remove(entities.size() - 1);
                 }
                 case Mode.LIFO -> {
                     return entities.remove(0);
@@ -69,7 +66,7 @@ public class EntitySet {
         return null;
     }
 
-    private Entity removeById(int id){
+    private Entity removeById(int id) {
         this.size--;
         return entities.remove(id);
     }
@@ -88,7 +85,7 @@ public class EntitySet {
 
     // TODO: impelementar. PS.: Perguntar pro professor
     public double averageSize() {
-        return size/2;
+        return size / 2;
     }
 
     public int getSize() {
@@ -104,7 +101,7 @@ public class EntitySet {
         for (int i = 0; i < size; i++) {
             timeAv += entities.get(i).getCreationTime();
         }
-        return timeAv/size;
+        return timeAv / size;
     }
 
     // TODO: implementar
@@ -112,22 +109,23 @@ public class EntitySet {
     public double maxTimeInSet() {
         int timeAv = 0;
         for (int i = 0; i < size; i++) {
-            timeAv += entities.get(i).getCreationTime()/2;
+            timeAv += entities.get(i).getCreationTime() / 2;
         }
-        return timeAv/size;
+        return timeAv / size;
     }
 
-    Map<Integer, Integer> log  = new HashMap<>();
+    Map<Integer, Integer> log = new HashMap<>();
+
     public void startLog(int timeGap) throws IOException {
         // CSV
         File fout = new File("log.csv");
         FileOutputStream fos = new FileOutputStream(fout);
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-        Map<Integer, Integer> start_log  = new HashMap<>();
+        Map<Integer, Integer> start_log = new HashMap<>();
         for (int i = 0; i < size; i++) {
             start_log.put((int) entities.get(i).getCreationTime(), getSize());
-            log.put((int)entities.get(i).getCreationTime(),getSize());
-            bw.write("START: "+start_log.toString());
+            log.put((int) entities.get(i).getCreationTime(), getSize());
+            bw.write("START: " + start_log.toString());
             bw.newLine();
         }
 
@@ -139,11 +137,11 @@ public class EntitySet {
         FileOutputStream fos = new FileOutputStream(fout);
 
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-        Map<Integer, Integer> stop_log  = new HashMap<>();
+        Map<Integer, Integer> stop_log = new HashMap<>();
         for (int i = 0; i < size; i++) {
             stop_log.put((int) entities.get(i).getCreationTime(), getSize());
-            log.put((int)entities.get(i).getCreationTime(),getSize());
-            bw.write("STOP: "+stop_log.toString());
+            log.put((int) entities.get(i).getCreationTime(), getSize());
+            bw.write("STOP: " + stop_log.toString());
             bw.newLine();
         }
         bw.close();
@@ -152,7 +150,7 @@ public class EntitySet {
     public Map<Integer, Integer> getLog() {
         return log;
     }
-  
+
     public int getId() {
         return id;
     }

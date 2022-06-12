@@ -2,11 +2,11 @@ package src;
 
 public class Process {
 
-    private int processId;
-    private String name;
-    private double startTime;
-    private double duration;
-    private boolean active;
+    protected int processId;
+    protected String name;
+    protected double startTime;
+    protected double duration;
+    protected boolean active;
 
     public Process(int processId, String name, double duration) {
         this.processId = processId;
@@ -44,7 +44,9 @@ public class Process {
 
     public void executeOnStart() {}
 
-    public void executeOnEnd(){}
+    public void executeOnEnd(){
+        startTime += duration;
+    }
 
     public int getProcessId() {
         return processId;

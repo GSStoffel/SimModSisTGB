@@ -8,13 +8,20 @@ public class Restaurante extends DesEngine {
 
     @Override
     public void simulate() {
-        for (Process p : processes) {
-            if (p.isActive() && p.getStartTime() >= time) {
-                p.executeOnStart();
-            }
+        double nextTime = 0;
+        while (time < maxTimeSimulate) {
+            for (Process p : processes) {
+                if (p.isActive() && p.getStartTime() >= time) {
+                    p.executeOnStart();
+                }
 
-            if (p.isActive() && p.getEndTime() <= time) {
-                p.executeOnEnd();
+                if (p.isActive() && p.getEndTime() <= time) {
+                    p.executeOnEnd();
+                }
+
+                if (nextTime < p.getStartTime()) {
+                    nextTime = p.getStartTime();
+                }
             }
         }
     }

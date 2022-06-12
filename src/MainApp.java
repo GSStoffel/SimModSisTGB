@@ -17,17 +17,18 @@ public class MainApp {
 
         int cozinheirosId = r.createResource("cozinheiros", 3);
 
+        // FILAS
+
         int caixa1 = r.createEntitySet("caixa1", Mode.FIFO, 100);
         int caixa2 = r.createEntitySet("caixa2", Mode.FIFO, 100);
 
         int cozinha = r.createEntitySet("cozinha", Mode.FIFO, 100);
 
-        // FILAS
-
         int filaBalcao = r.createEntitySet("filaBalcão", Mode.FIFO, 100);
+        int filaM2 = r.createEntitySet("filaM2", Mode.FIFO, 100);
+        int filaM4 = r.createEntitySet("filaM4", Mode.FIFO, 100);
 
-        int fila1 = r.createEntitySet("fila1", Mode.FIFO, 100);
-        int fila2 = r.createEntitySet("fila2", Mode.FIFO, 100);
+        r.createEntitySet("pedidoEsperandoEntrega", Mode.FIFO, 100);
 
         // PROCESSOS - Chegada
 
@@ -39,9 +40,8 @@ public class MainApp {
         // PROCESSOS - Comendo
 
         int comendoBalcao = r.createProcess("ComendoBalcao", r.exponential(3), r.getEntitySet(filaBalcao), r.getResource(balcaoId));
-
-        int comendoM1 = r.createProcess("ComendoM1", r.exponential(3), r.getEntitySet(fila1), r.getResource(mesa2Id));
-        int comendoM2 = r.createProcess("ComendoM2", r.exponential(3), r.getEntitySet(fila2), r.getResource(mesa4Id));
+        int comendoM2 = r.createProcess("ComendoM1", r.exponential(3), r.getEntitySet(filaM2), r.getResource(mesa2Id));
+        int comendoM4 = r.createProcess("ComendoM2", r.exponential(3), r.getEntitySet(filaM4), r.getResource(mesa4Id));
 
     }
 }

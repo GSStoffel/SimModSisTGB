@@ -121,9 +121,9 @@ public abstract class DesEngine {
         return entity.getId();
     }
 
-    public Entity destroyEntity(int id){
-        return entities.remove(getEntity(id));
-    }
+//    public Entity destroyEntity(int id){
+//        return entities.remove(getEntity(id));
+//    }
 
     public int createResource(String name, int quantity){
         Resource resource = new Resource(getMaxResourceId()+1, name, quantity);

@@ -3,19 +3,29 @@ package src.restaurante.process;
 import src.Entity;
 import src.EntitySet;
 import src.Process;
+import src.Resource;
+import src.restaurante.entityset.Fila;
 
 public class Comendo extends Process {
-    public Comendo(int processId, String name, double duration, EntitySet fila) {
+    private EntitySet fila;
+    private Resource resource;
+
+    public Comendo(int processId, String name, double duration, EntitySet fila, Resource resource) {
         super(processId, name, duration);
+        this.fila = fila;
+        this.resource = resource;
     }
 
     @Override
     public void executeOnStart() {
-        super.executeOnStart();
+        boolean allocated = resource.allocate(1);
+        if (allocated) {
+            fila.remove();
+        }
     }
 
     @Override
     public void executeOnEnd() {
-        super.executeOnEnd();
+        resource.release(1);
     }
 }
