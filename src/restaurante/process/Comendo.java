@@ -1,10 +1,8 @@
 package src.restaurante.process;
 
-import src.Entity;
 import src.EntitySet;
 import src.Process;
 import src.Resource;
-import src.restaurante.entityset.Fila;
 
 public class Comendo extends Process {
     private EntitySet fila;

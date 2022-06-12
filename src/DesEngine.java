@@ -142,11 +142,6 @@ public abstract class DesEngine {
         return null;
     }
 
-    public int createProcess(String name, double duration){
-        Process process = new Process(getMaxProcessId()+1, name, duration);
-        return process.getId();
-    }
-
     public Process getProcess(int processId){
         for (Process p : processes) {
             if (p.getId() == processId) {
@@ -269,6 +264,11 @@ public abstract class DesEngine {
         return 0;
     }
 
-    public abstract int createProcess(String name, double duration, EntitySet entitySet, Resource resource);
+    public int createProcess(String name, double duration){
+        Process process = new Process(getMaxProcessId()+1, name, duration);
+        return process.getId();
+    }
+
+    public abstract int createProcess(String name, double duration, List<EntitySet> entitySetList, Resource resource);
 
 }

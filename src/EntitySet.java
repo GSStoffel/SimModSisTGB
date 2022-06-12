@@ -154,4 +154,8 @@ public class EntitySet {
     public int getId() {
         return id;
     }
+
+    public List<Entity> getEntities() {
+        return entities;
+    }
 }

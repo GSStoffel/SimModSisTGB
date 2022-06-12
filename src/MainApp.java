@@ -2,6 +2,10 @@ package src;
 
 import src.restaurante.Restaurante;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 public class MainApp {
 
     public static void main(String[] args) {
@@ -32,17 +36,26 @@ public class MainApp {
 
         // PROCESSOS - Chegada
 
-        int chegada_1 = r.createProcess("Chegada1", r.exponential(3), r.getEntitySet(caixa1), r.getResource(atendenteCx1));
-        int chegada_2 = r.createProcess("Chegada2", r.exponential(3), r.getEntitySet(caixa2), r.getResource(atendenteCx2));
+        int chegada = r.createProcess("Chegada1", r.exponential(3), new ArrayList<EntitySet>() {{
+            add(r.getEntitySet(caixa1));
+            add(r.getEntitySet(caixa2));
+        }}, r.getResource(atendenteCx1));
 
-        int chegadaPedidos = r.createProcess("ChegadaPedidos", r.exponential(3), r.getEntitySet(cozinha), r.getResource(cozinheirosId));
+        int chegadaPedidos = r.createProcess("ChegadaPedidos", r.exponential(3), new ArrayList<EntitySet>() {{
+            add(r.getEntitySet(cozinha));
+        }}, r.getResource(cozinheirosId));
 
         // PROCESSOS - Comendo
 
-        int comendoBalcao = r.createProcess("ComendoBalcao", r.exponential(3), r.getEntitySet(filaBalcao), r.getResource(balcaoId));
-        int comendoM2 = r.createProcess("ComendoM1", r.exponential(3), r.getEntitySet(filaM2), r.getResource(mesa2Id));
-        int comendoM4 = r.createProcess("ComendoM2", r.exponential(3), r.getEntitySet(filaM4), r.getResource(mesa4Id));
-
+        int comendoBalcao = r.createProcess("ComendoBalcao", r.exponential(3), new ArrayList<EntitySet>() {{
+            add(r.getEntitySet(filaBalcao));
+        }}, r.getResource(balcaoId));
+        int comendoM2 = r.createProcess("ComendoM1", r.exponential(3), new ArrayList<EntitySet>() {{
+            add(r.getEntitySet(filaM2));
+        }}, r.getResource(mesa2Id));
+        int comendoM4 = r.createProcess("ComendoM2", r.exponential(3), new ArrayList<EntitySet>() {{
+            add(r.getEntitySet(filaM4));
+        }}, r.getResource(mesa4Id));
 
 
         r.simulate();

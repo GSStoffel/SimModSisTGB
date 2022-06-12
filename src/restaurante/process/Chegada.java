@@ -4,30 +4,55 @@ import src.Entity;
 import src.EntitySet;
 import src.Process;
 import src.Resource;
+import src.restaurante.Restaurante;
+import src.restaurante.entity.GrupoClientes;
+import src.restaurante.entityset.Fila;
+
+import java.util.List;
 
 public class Chegada extends Process {
 
-    public  Entity client;
-    private EntitySet fila;
-    private Resource atendenteCx;
+    public Entity entity;
+    private List<EntitySet> entitySetList;
+    private Resource resource;
 
-    public Chegada(int processId, String name, double duration, EntitySet fila, Resource atendenteCx) {
+    public Chegada(int processId, String name, double duration, List<EntitySet> entitySetList, Resource resource) {
         super(processId, name, duration);
-        this.fila = fila;
-        this.atendenteCx = atendenteCx;
+        this.entitySetList = entitySetList;
+        this.resource = resource;
     }
 
     @Override
     public void executeOnStart() {
-        if(!fila.isEmpty()){
-            if(atendenteCx.allocate(1)){
-                client = fila.remove();
-            }
+        if (isCashierAvailable()) {
+            entity = new GrupoClientes("GrupoClientes");
         }
     }
 
     @Override
     public void executeOnEnd() {
-        super.executeOnEnd();
+        if(entity != null) {
+            EntitySet entitySet = shortestQueue();
+            entitySet.getEntities().add(entity);
+        }
+    }
+
+    private EntitySet shortestQueue() {
+        EntitySet menorFila = entitySetList.get(0);
+        for (EntitySet es : entitySetList) {
+            if (es.getSize() < menorFila.getSize()) {
+                menorFila = es;
+            }
+        }
+        return menorFila;
+    }
+
+    private boolean isCashierAvailable() {
+        for (EntitySet es : entitySetList) {
+            if (!es.isFull()) {
+                return true;
+            }
+        }
+        return false;
     }
 }
