@@ -19,7 +19,7 @@ public class MainApp {
 
         int caixa1 = r.createEntitySet("caixa1", Mode.FIFO, 100);
 
-        r.createProcess("Chegada", r.exponential(3), r.getEntitySet(caixa1), r.getResource(atendenteCx1));
+        int chegada = r.createProcess("Chegada", r.exponential(3), r.getEntitySet(caixa1), r.getResource(atendenteCx1));
 
 
     }
