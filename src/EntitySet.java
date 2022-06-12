@@ -123,9 +123,7 @@ public class EntitySet {
         // CSV
         File fout = new File("log.csv");
         FileOutputStream fos = new FileOutputStream(fout);
-
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-
         Map<Integer, Integer> start_log  = new HashMap<>();
         for (int i = 0; i < size; i++) {
             start_log.put((int) entities.get(i).getCreationTime(), getSize());
@@ -142,7 +140,6 @@ public class EntitySet {
         FileOutputStream fos = new FileOutputStream(fout);
 
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-
         Map<Integer, Integer> stop_log  = new HashMap<>();
         for (int i = 0; i < size; i++) {
             stop_log.put((int) entities.get(i).getCreationTime(), getSize());
@@ -150,14 +147,13 @@ public class EntitySet {
             bw.write("STOP: "+stop_log.toString());
             bw.newLine();
         }
-
         bw.close();
     }
 
     public Map<Integer, Integer> getLog() {
         return log;
     }
-
+  
     public int getId() {
         return id;
     }
