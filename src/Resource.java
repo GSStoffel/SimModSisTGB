@@ -2,16 +2,13 @@ package src;
 
 public class Resource {
 
-    private String name;
     private int id;
+    private String name;
     private int quantity;
 
-    public Resource(String name, int quantity) {
+    public Resource(int id, String name, int quantity) {
+        this.id = id;
         this.name = name;
-        this.quantity = quantity;
-    }
-
-    public Resource(int quantity) {
         this.quantity = quantity;
     }
 
@@ -37,5 +34,17 @@ public class Resource {
     // TODO: implementar
     public double avarageAllocation() {
         return 0;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public int getQuantity() {
+        return quantity;
     }
 }

@@ -4,6 +4,7 @@ public class Entity {
     private String name;
     private int id;
     private double creationTime;
+    private double endTime;
     private int priority;
     private PetriNet petriNet;
 
@@ -55,6 +56,14 @@ public class Entity {
 
     public void setPetriNet(PetriNet petriNet) {
         this.petriNet = petriNet;
+    }
+
+    public double getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(double endTime) {
+        this.endTime = endTime;
     }
 
     @Override

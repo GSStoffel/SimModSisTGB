@@ -49,4 +49,12 @@ public class Process {
     public void executeOnEnd(){
 
     }
+
+    public int getProcessId() {
+        return processId;
+    }
+
+    public int getId() {
+        return processId;
+    }
 }

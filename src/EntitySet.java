@@ -1,6 +1,8 @@
 package src;
 
+import java.io.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -17,7 +19,8 @@ public class EntitySet {
 
     private List<Entity> entities;
 
-    public EntitySet(String name, int mode, int maxPossibleSize) {
+    public EntitySet(int id, String name, int mode, int maxPossibleSize) {
+        this.id = id;
         this.name = name;
         this.mode = mode;
         this.maxPossibleSize = maxPossibleSize;
@@ -46,7 +49,6 @@ public class EntitySet {
         return (int) ((Math.random() * (max - min)) + min);
     }
 
-    // TODO: implementar
     public Entity remove(){
         if (size > 0){
             switch (mode) {
@@ -68,7 +70,6 @@ public class EntitySet {
         return null;
     }
 
-    // TODO: implementar
     private Entity removeById(int id){
         this.size--;
         return entities.remove(id);
@@ -78,7 +79,6 @@ public class EntitySet {
         return size > 0;
     }
 
-    // TODO: implementar
     public Entity findEntity(int id) {
         return entities.get(id);
     }
@@ -89,7 +89,7 @@ public class EntitySet {
 
     // TODO: impelementar. PS.: Perguntar pro professor
     public double averageSize() {
-        return 0;
+        return size/2;
     }
 
     public int getSize() {
@@ -100,25 +100,65 @@ public class EntitySet {
         return maxPossibleSize;
     }
 
-    // TODO: implementar
     public double averageTimeInSet() {
-        return 0;
+        int timeAv = 0;
+        for (int i = 0; i < size; i++) {
+            timeAv += entities.get(i).getCreationTime();
+        }
+        return timeAv/size;
     }
 
     // TODO: implementar
+
     public double maxTimeInSet() {
-        return 0;
+        int timeAv = 0;
+        for (int i = 0; i < size; i++) {
+            timeAv += entities.get(i).getCreationTime()/2;
+        }
+        return timeAv/size;
     }
 
-    public void startLog(int timeGap) {
+    Map<Integer, Integer> log  = new HashMap<>();
+    public void startLog(int timeGap) throws IOException {
+        // CSV
+        File fout = new File("log.csv");
+        FileOutputStream fos = new FileOutputStream(fout);
 
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+        Map<Integer, Integer> start_log  = new HashMap<>();
+        for (int i = 0; i < size; i++) {
+            start_log.put((int) entities.get(i).getCreationTime(), getSize());
+            log.put((int)entities.get(i).getCreationTime(),getSize());
+            bw.write("START: "+start_log.toString());
+            bw.newLine();
+        }
+
+        bw.close();
     }
 
-    public void stopLog() {
+    public void stopLog() throws IOException {
+        File fout = new File("stop_log.csv");
+        FileOutputStream fos = new FileOutputStream(fout);
 
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
+
+        Map<Integer, Integer> stop_log  = new HashMap<>();
+        for (int i = 0; i < size; i++) {
+            stop_log.put((int) entities.get(i).getCreationTime(), getSize());
+            log.put((int)entities.get(i).getCreationTime(),getSize());
+            bw.write("STOP: "+stop_log.toString());
+            bw.newLine();
+        }
+
+        bw.close();
     }
 
     public Map<Integer, Integer> getLog() {
-        return null;
+        return log;
+    }
+
+    public int getId() {
+        return id;
     }
 }
