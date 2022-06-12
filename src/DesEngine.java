@@ -244,4 +244,21 @@ public class DesEngine {
         return total;
     }
 
+    public double allocationResourceRate(int resourceId) {
+        for (Resource r : resources) {
+            if (r.getId() == resourceId) {
+                return r.getTotalTimeAllocated() / time;
+            }
+        }
+        return 0;
+    }
+
+    public double avarageResourceAllocation(int resourceId) {
+        for (Resource r : resources) {
+            if (r.getId() == resourceId) {
+                return r.getTotalAllocation() / time;
+            }
+        }
+        return 0;
+    }
 }
