@@ -1,4 +1,4 @@
-package src.restaurante;
+package src.restaurante.process;
 
 import src.Entity;
 import src.EntitySet;

@@ -1,4 +1,4 @@
-package src.restaurante;
+package src.restaurante.entity;
 
 import src.Entity;
 import src.PetriNet;

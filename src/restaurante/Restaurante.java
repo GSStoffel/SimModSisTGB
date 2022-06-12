@@ -2,6 +2,7 @@ package src.restaurante;
 
 import src.*;
 import src.Process;
+import src.restaurante.process.Chegada;
 
 public class Restaurante extends DesEngine {
 

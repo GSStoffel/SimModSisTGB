@@ -1,6 +1,5 @@
 package src;
 
-import src.restaurante.Comendo;
 import src.restaurante.Restaurante;
 
 public class MainApp {

@@ -1,4 +1,4 @@
-package src.restaurante;
+package src.restaurante.entityset;
 
 import src.EntitySet;
 
