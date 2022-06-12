@@ -39,10 +39,10 @@ public class MainApp {
 
         // PROCESSOS - Comendo
 
-        int comendoBalcao = r.createProcess("ComendoBalcao", r.exponential(3), r.getEntitySet(filaBalcao).remove(), r.getResource(balcaoId));
+        int comendoBalcao = r.createProcess("ComendoBalcao", r.exponential(3), r.getEntitySet(filaBalcao), r.getResource(balcaoId));
 
-        int comendoM1 = r.createProcess("ComendoM1", r.exponential(3), r.getEntitySet(fila1).remove(), r.getResource(mesa2Id));
-        int comendoM2 = r.createProcess("ComendoM2", r.exponential(3), r.getEntitySet(fila2).remove(), r.getResource(mesa4Id));
+        int comendoM1 = r.createProcess("ComendoM1", r.exponential(3), r.getEntitySet(fila1), r.getResource(mesa2Id));
+        int comendoM2 = r.createProcess("ComendoM2", r.exponential(3), r.getEntitySet(fila2), r.getResource(mesa4Id));
 
     }
 }

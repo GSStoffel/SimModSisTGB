@@ -1,9 +1,11 @@
 package src.restaurante;
 
+import src.Entity;
+import src.EntitySet;
 import src.Process;
 
 public class Comendo extends Process {
-    public Comendo(int processId, String name, double duration) {
+    public Comendo(int processId, String name, double duration, EntitySet fila) {
         super(processId, name, duration);
     }
 

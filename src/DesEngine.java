@@ -116,6 +116,15 @@ public abstract class DesEngine {
         return null;
     }
 
+    public int createEntity(Entity entity){
+        entities.add(entity);
+        return entity.getId();
+    }
+
+    public Entity destroyEntity(int id){
+        return entities.remove(getEntity(id));
+    }
+
     public int createResource(String name, int quantity){
         Resource resource = new Resource(getMaxResourceId()+1, name, quantity);
         resources.add(resource);
@@ -260,6 +269,4 @@ public abstract class DesEngine {
 
     public abstract int createProcess(String name, double duration, EntitySet entitySet, Resource resource);
 
-    // COMENDO
-    public abstract int createProcess(String name, double duration, Entity entity, Resource resource);
 }
