@@ -117,7 +117,7 @@ public class DesEngine {
     }
 
     public int createResource(String name, int quantity){
-        Resource resource = new Resource(getMaxResourceId(), name, quantity);
+        Resource resource = new Resource(getMaxResourceId()+1, name, quantity);
         resources.add(resource);
         return resource.getId();
     }
@@ -132,7 +132,7 @@ public class DesEngine {
     }
 
     public int createProcess(String name, int duration){
-        Process process = new Process(getMaxProcessId(), name, duration);
+        Process process = new Process(getMaxProcessId()+1, name, duration);
         processes.add(process);
         return process.getId();
     }
@@ -147,7 +147,7 @@ public class DesEngine {
     }
 
     public int createEntitySet(String name, int mode, int maxPossibleSize){
-        EntitySet entitySet = new EntitySet(getMaxEntitySetId(), name, mode, maxPossibleSize);
+        EntitySet entitySet = new EntitySet(getMaxEntitySetId()+1, name, mode, maxPossibleSize);
         entitysets.add(entitySet);
         return entitySet.getId();
     }
