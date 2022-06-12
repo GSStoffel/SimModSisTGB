@@ -53,4 +53,8 @@ public class Process {
     public int getId() {
         return processId;
     }
+
+    public String getName() {
+        return name;
+    }
 }

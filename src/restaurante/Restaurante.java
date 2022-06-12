@@ -1,6 +1,6 @@
 package src.restaurante;
 
-import src.DesEngine;
+import src.*;
 import src.Process;
 
 public class Restaurante extends DesEngine {
@@ -16,5 +16,15 @@ public class Restaurante extends DesEngine {
                 p.executeOnEnd();
             }
         }
+    }
+
+
+    @Override
+    public int createProcess(String name, double duration, EntitySet entitySet, Resource resource) {
+        int processId = super.createProcess(name, duration);
+        Process process = getProcess(processId);
+        Chegada chegada = new Chegada(process.getId(), process.getName(), process.getDuration(), entitySet, resource);
+        processes.add(chegada);
+        return chegada.getId();
     }
 }

@@ -17,6 +17,9 @@ public class MainApp {
 
         int cozinheirosId = r.createResource("cozinheiros", 3);
 
+        int caixa1 = r.createEntitySet("caixa1", Mode.FIFO, 100);
+
+        r.createProcess("Chegada", r.exponential(3), r.getEntitySet(caixa1), r.getResource(atendenteCx1));
 
 
     }

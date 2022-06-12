@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class DesEngine {
+public abstract class DesEngine {
 
     protected List<Entity> entities = new ArrayList<>();
     protected List<EntitySet> entitysets = new ArrayList<>();
@@ -131,9 +131,8 @@ public class DesEngine {
         return null;
     }
 
-    public int createProcess(String name, int duration){
+    public int createProcess(String name, double duration){
         Process process = new Process(getMaxProcessId()+1, name, duration);
-        processes.add(process);
         return process.getId();
     }
 
@@ -141,6 +140,15 @@ public class DesEngine {
         for (Process p : processes) {
             if (p.getId() == processId) {
                 return p;
+            }
+        }
+        return null;
+    }
+
+    public EntitySet getEntitySet(int entitySet){
+        for (EntitySet es : entitysets) {
+            if (es.getId() == entitySet) {
+                return es;
             }
         }
         return null;
@@ -249,4 +257,6 @@ public class DesEngine {
         }
         return 0;
     }
+
+    public abstract int createProcess(String name, double duration, EntitySet entitySet, Resource resource);
 }
