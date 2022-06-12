@@ -42,6 +42,14 @@ public class Entity {
         return creationTime;
     }
 
+    public double getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(double endTime) {
+        this.endTime = endTime;
+    }
+
     public int getPriority() {
         return priority;
     }
@@ -58,19 +66,12 @@ public class Entity {
         this.petriNet = petriNet;
     }
 
-    public double getEndTime() {
-        return endTime;
-    }
-
-    public void setEndTime(double endTime) {
-        this.endTime = endTime;
-    }
-
     @Override
     public String toString() {
         return "Id: " + this.id + " " + 
             "Name: " + this.name + " " + 
-            "CreationTime: " + this.creationTime + " " + 
+            "CreationTime: " + this.creationTime + " " +
+            "EndTime: " + this.creationTime + " " +
             "Priority: " + this.priority;
     }
 }

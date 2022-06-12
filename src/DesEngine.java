@@ -14,6 +14,7 @@ public class DesEngine {
     private List<Process> processes = new ArrayList<>();
     private double time;
     private double maxTimeSimulate;
+    private boolean simulateOneStep;
 
     public DesEngine() {
         this.time = 0;
@@ -98,14 +99,23 @@ public class DesEngine {
         process.setStartTime(absoluteTime);
     }
 
-    public void waitFor(int time){}
+//    public void waitFor(int time){}
 
-    public void simulateOneStep(){}
+//    public void simulateOneStep(){}
 
     public void simulateBy(int duration){}
 
     public void simulateUntil(int absoluteTime){
+        this.maxTimeSimulate = absoluteTime;
+    }
 
+
+    public boolean isSimulateOneStep() {
+        return simulateOneStep;
+    }
+
+    public void setSimulateOneStep(boolean simulateOneStep) {
+        this.simulateOneStep = simulateOneStep;
     }
 
     //  criacao e destruicao
@@ -122,6 +132,7 @@ public class DesEngine {
 
     public int createResource(String name, int quantity){
         Resource resource = new Resource(getMaxResourceId(), name, quantity);
+        resources.add(resource);
         return resource.getId();
     }
 
@@ -136,6 +147,7 @@ public class DesEngine {
 
     public int createProcess(String name, int duration){
         Process process = new Process(getMaxProcessId(), name, duration);
+        processes.add(process);
         return process.getId();
     }
 
@@ -150,6 +162,7 @@ public class DesEngine {
 
     public int createEntitySet(String name, int mode, int maxPossibleSize){
         EntitySet entitySet = new EntitySet(getMaxEntitySetId(), name, mode, maxPossibleSize);
+        entitysets.add(entitySet);
         return entitySet.getId();
     }
 
@@ -223,5 +236,14 @@ public class DesEngine {
         return total / entities.size();
     }
 
-    public int maxEntitiesPresent(){ return 0; }
+    public int maxEntitiesPresent(){
+        int total = 0;
+        for (Entity e : entities) {
+            if (e.getEndTime() < time) {
+                total++;
+            }
+        }
+        return total;
+    }
+
 }
