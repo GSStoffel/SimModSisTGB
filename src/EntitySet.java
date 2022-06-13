@@ -65,6 +65,17 @@ public class EntitySet {
         return null;
     }
 
+    public Entity removerId(int id) {
+        Entity entity = null;
+        for (Entity e : entities) {
+            if (e.getId() == id) {
+                entity = e;
+                entities.remove(e);
+            }
+        }
+        return entity;
+    }
+
     private Entity removeById(int id) {
         return entities.remove(id);
     }

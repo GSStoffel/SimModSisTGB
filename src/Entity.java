@@ -42,6 +42,10 @@ public class Entity {
         return name;
     }
 
+    public void setCreationTime(double creationTime) {
+        this.creationTime = creationTime;
+    }
+
     public int getId() {
         return id;
     }

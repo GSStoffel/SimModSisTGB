@@ -4,6 +4,7 @@ public class Resource {
 
     protected int id;
     protected String name;
+    protected int maxQuantity;
     protected int quantity;
     protected double totalTimeAllocated;
     protected int totalAllocation;
@@ -12,12 +13,13 @@ public class Resource {
         this.id = id;
         this.name = name;
         this.quantity = quantity;
+        this.maxQuantity = quantity;
         this.totalTimeAllocated = 0;
         this.totalAllocation = 0;
     }
 
     public boolean allocate(int quantity) {
-        if (quantity <= this.quantity) {
+        if (quantity < this.quantity) {
             this.quantity -= quantity;
             this.totalAllocation++;
             return true;
@@ -57,6 +59,10 @@ public class Resource {
 
     public void setTotalAllocation(int totalAllocation) {
         this.totalAllocation = totalAllocation;
+    }
+
+    public int getMaxQuantity() {
+        return maxQuantity;
     }
 
     @Override

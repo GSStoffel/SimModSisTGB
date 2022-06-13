@@ -2,6 +2,7 @@ package src;
 
 import src.restaurante.Restaurante;
 import src.restaurante.process.Chegada;
+import src.restaurante.process.Comendo;
 import src.restaurante.process.PagamentoPedido;
 import src.restaurante.process.PreparandoPedido;
 
@@ -39,7 +40,10 @@ public class MainApp {
 
         // PROCESSOS - Chegada
 
-        int chegada = r.createProcess(new Chegada("chegada", r.exponential(3), new ArrayList<EntitySet>() {{add(r.getEntitySet(filaCaixa1));add(r.getEntitySet(filaCaixa2));}}, r));
+        int chegada = r.createProcess(new Chegada("chegada", r.exponential(3), new ArrayList<EntitySet>() {{
+            add(r.getEntitySet(filaCaixa1));
+            add(r.getEntitySet(filaCaixa2));
+        }}, r));
 
         int pagamentoPedido1 = r.createProcess(new PagamentoPedido("pagamentoPedido1", r.normal(8, 2), r.getResource(atendenteCx1), r.getEntitySet(filaCaixa1), r.getEntitySet(filaCozinha), r.getEntitySet(filaBalcao), r.getEntitySet(filaM2), r.getEntitySet(filaM4)));
         int pagamentoPedido2 = r.createProcess(new PagamentoPedido("pagamentoPedido2", r.normal(8, 2), r.getResource(atendenteCx2), r.getEntitySet(filaCaixa2), r.getEntitySet(filaCozinha), r.getEntitySet(filaBalcao), r.getEntitySet(filaM2), r.getEntitySet(filaM4)));
@@ -58,6 +62,10 @@ public class MainApp {
 //        int comendoM4 = r.createProcess("ComendoM2", r.exponential(3), new ArrayList<EntitySet>() {{
 //            add(r.getEntitySet(filaM4));
 //        }}, r.getResource(mesa4Id));
+
+        int comendoBalcao = r.createProcess(new Comendo("comendoBalcao", r.normal(20, 8), r.getEntitySet(pedidoEsperandoEntrega), r.getEntitySet(filaBalcao), r.getResource(balcaoId)));
+        int comendom2 = r.createProcess(new Comendo("comendom2", r.normal(20, 8), r.getEntitySet(pedidoEsperandoEntrega), r.getEntitySet(filaM2), r.getResource(mesa2Id)));
+        int comendoM4 = r.createProcess(new Comendo("comendoM4", r.normal(20, 8), r.getEntitySet(pedidoEsperandoEntrega), r.getEntitySet(filaM4), r.getResource(mesa4Id)));
 
         r.simulateUntil(300);
         r.simulate();

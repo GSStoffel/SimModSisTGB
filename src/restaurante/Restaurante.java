@@ -3,6 +3,7 @@ package src.restaurante;
 import src.*;
 import src.Process;
 import src.restaurante.process.Chegada;
+import src.restaurante.process.Comendo;
 import src.restaurante.process.PagamentoPedido;
 import src.restaurante.process.PreparandoPedido;
 
@@ -55,5 +56,12 @@ public class Restaurante extends DesEngine {
         processes.add(preparandoPedido);
         SystemLog.writeInFile("CRIANDO PROCESSO DE PREPARAÇÃO DO PEDIDO: "+preparandoPedido.toString());
         return preparandoPedido.getProcessId();
+    }
+
+    public int createProcess(Comendo comendo) {
+        comendo.setProcessId(getMaxProcessId()+1);
+        processes.add(comendo);
+        SystemLog.writeInFile("CRIANDO PROCESSO DE COMENDO: "+comendo.toString());
+        return comendo.getProcessId();
     }
 }

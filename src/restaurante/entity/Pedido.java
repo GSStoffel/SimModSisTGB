@@ -23,4 +23,8 @@ public class Pedido extends Entity {
     public Pedido(String name, PetriNet petriNet, double creationTime, int priority) {
         super(name, petriNet, creationTime, priority);
     }
+
+    public GrupoClientes getGrupoClientes() {
+        return grupoClientes;
+    }
 }

@@ -28,6 +28,7 @@ public class Chegada extends Process {
         if (isCashierAvailable()) {
             int grupoClientesId = restaurante.createEntity("GrupoClientes");
             entity = restaurante.getEntity(grupoClientesId);
+            entity.setCreationTime(startTime);
         }
     }
 
