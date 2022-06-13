@@ -14,6 +14,11 @@ public class Process {
         this.duration = duration;
     }
 
+    public Process(String name, double duration) {
+        this.name = name;
+        this.duration = duration;
+    }
+
     public double getDuration() {
         return duration;
     }
@@ -52,11 +57,11 @@ public class Process {
         return processId;
     }
 
-    public int getId() {
-        return processId;
-    }
-
     public String getName() {
         return name;
+    }
+
+    public void setProcessId(int processId) {
+        this.processId = processId;
     }
 }

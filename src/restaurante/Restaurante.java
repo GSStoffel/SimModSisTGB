@@ -4,8 +4,6 @@ import src.*;
 import src.Process;
 import src.restaurante.process.Chegada;
 
-import java.util.List;
-
 public class Restaurante extends DesEngine {
 
     @Override
@@ -28,18 +26,9 @@ public class Restaurante extends DesEngine {
         }
     }
 
-    @Override
-    public int createProcess(String name, double duration, List<EntitySet> entitySetList) {
-        int processId = super.createProcess(name, duration);
-        Process process = getProcess(processId);
-        Chegada chegada = new Chegada(process.getId(), process.getName(), process.getDuration(), entitySetList);
+    public int createProcess(Chegada chegada) {
+        chegada.setProcessId(getMaxProcessId()+1);
         processes.add(chegada);
-        return chegada.getId();
+        return chegada.getProcessId();
     }
-
-    @Override
-    public int createProcess(String name, double duration, List<EntitySet> entitySetList, Resource resource) {
-        return 0;
-    }
-
 }

@@ -3,19 +3,16 @@ package src.restaurante.process;
 import src.Entity;
 import src.EntitySet;
 import src.Process;
-import src.Resource;
-import src.restaurante.Restaurante;
 import src.restaurante.entity.GrupoClientes;
-import src.restaurante.entityset.Fila;
 
 import java.util.List;
 
-public class Chegada extends Process {
+public class PagamentoPedido extends Process {
 
     public Entity entity;
     private List<EntitySet> entitySetList;
 
-    public Chegada(String name, double duration, List<EntitySet> entitySetList) {
+    public PagamentoPedido(String name, double duration, List<EntitySet> entitySetList) {
         super(name, duration);
         this.entitySetList = entitySetList;
     }
@@ -54,3 +51,4 @@ public class Chegada extends Process {
         return false;
     }
 }
+

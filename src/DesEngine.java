@@ -144,7 +144,7 @@ public abstract class DesEngine {
 
     public Process getProcess(int processId){
         for (Process p : processes) {
-            if (p.getId() == processId) {
+            if (p.getProcessId() == processId) {
                 return p;
             }
         }
@@ -166,15 +166,15 @@ public abstract class DesEngine {
         return entitySet.getId();
     }
 
-    private int getMaxProcessId() {
+    protected int getMaxProcessId() {
         if(processes.isEmpty()) {
             return 0;
         }
 
         int id = 1;
         for (Process p : processes) {
-            if(id < p.getId()) {
-                id = p.getId();
+            if(id < p.getProcessId()) {
+                id = p.getProcessId();
             }
         }
         return id;
@@ -266,10 +266,8 @@ public abstract class DesEngine {
 
     public int createProcess(String name, double duration){
         Process process = new Process(getMaxProcessId()+1, name, duration);
-        return process.getId();
+        processes.add(process);
+        return process.getProcessId();
     }
 
-    public abstract int createProcess(String name, double duration, List<EntitySet> entitySetList);
-
-    public abstract int createProcess(String name, double duration, List<EntitySet> entitySetList, Resource resource);
 }
