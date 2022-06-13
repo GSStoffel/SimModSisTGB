@@ -19,7 +19,7 @@ public class Resource {
     }
 
     public boolean allocate(int quantity) {
-        if (quantity < this.quantity) {
+        if (quantity <= this.quantity) {
             this.quantity -= quantity;
             this.totalAllocation++;
             return true;
