@@ -12,6 +12,8 @@ public class Process {
         this.processId = processId;
         this.name = name;
         this.duration = duration;
+        this.active = true;
+        this.startTime = 0;
     }
 
     public Process(String name, double duration) {

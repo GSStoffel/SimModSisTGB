@@ -9,7 +9,7 @@ public class Restaurante extends DesEngine {
     @Override
     public void simulate() {
         double nextTime = 0;
-        while (time < maxTimeSimulate) {
+        while (time <= maxTimeSimulate) {
             for (Process p : processes) {
                 if (p.isActive() && p.getStartTime() >= time) {
                     p.executeOnStart();

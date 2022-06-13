@@ -17,6 +17,7 @@ public class Chegada extends Process {
         super(name, duration);
         this.entitySetList = entitySetList;
         this.restaurante = restaurante;
+        this.active = true;
     }
 
     @Override
