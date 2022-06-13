@@ -70,9 +70,9 @@ public class EntitySet {
         for (Entity e : entities) {
             if (e.getId() == id) {
                 entity = e;
-                entities.remove(e);
             }
         }
+        entities.remove(entity);
         return entity;
     }
 

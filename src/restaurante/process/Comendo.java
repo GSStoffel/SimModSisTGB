@@ -26,15 +26,21 @@ public class Comendo extends Process {
         super.executeOnStart();
         if (!filaPedidosEsperando.getEntities().isEmpty()) {
             if (!filaLugar.getEntities().isEmpty()) {
+                Entity grupoClientes = null;
+                Entity pedido = null;
                 for (Entity gc : filaLugar.getEntities()) {
                     for (Entity p : filaPedidosEsperando.getEntities()) {
                         if (((GrupoClientes) gc).getId() == ((Pedido) p).getGrupoClientes().getId()){
-                            boolean isAllocated = resource.allocate(1);
-                            if (isAllocated) {
-                                entity = filaLugar.removerId(gc.getId());
-                                filaPedidosEsperando.removerId(p.getId());
-                            }
+                            grupoClientes = gc;
+                            pedido = p;
                         }
+                    }
+                }
+                if (grupoClientes != null && pedido != null){
+                    boolean isAllocated = resource.allocate(1);
+                    if (isAllocated) {
+                        entity = filaLugar.removerId(grupoClientes.getId());
+                        filaPedidosEsperando.removerId(pedido.getId());
                     }
                 }
             }
