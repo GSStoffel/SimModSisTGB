@@ -70,5 +70,7 @@ public class MainApp {
         r.simulateUntil(300);
         r.simulate();
 
+        new StatisticsRestaurante(r).getStatistics();
+
     }
 }

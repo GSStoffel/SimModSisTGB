@@ -106,14 +106,21 @@ public class EntitySet {
     }
 
     public double averageTimeInSet() {
+        if(entities.size()<=0)
+            return 0;
+
         int timeAv = 0;
         for (int i = 0; i < entities.size(); i++) {
             timeAv += entities.get(i).getCreationTime();
         }
+
         return timeAv / entities.size();
     }
 
     public double maxTimeInSet() {
+        if(entities.size()<=0)
+            return 0;
+
         int timeAv = 0;
         for (int i = 0; i < entities.size(); i++) {
             timeAv += entities.get(i).getCreationTime() / 2;
@@ -156,7 +163,7 @@ public class EntitySet {
         return "EntitySet{" +
                 "name='" + name + '\'' +
                 ", id=" + id +
-                ", mode=" + mode +
+                ", mode=" + Mode.Name(mode)  +
                 ", size=" + entities.size() +
                 ", maxPossibleSize=" + maxPossibleSize +
                 '}';

@@ -16,6 +16,8 @@ public abstract class DesEngine {
     protected double maxTimeSimulate;
     protected boolean simulateOneStep;
 
+    protected int totalPeoplePassedSim;
+
     public DesEngine() {
         this.time = 0;
     }
@@ -130,6 +132,8 @@ public abstract class DesEngine {
         entities.add(grupoClientes);
 
         SystemLog.writeInFile("CRIANDO ENTIDADE: "+grupoClientes.toString());
+
+        totalPeoplePassedSim++;
 
         return grupoClientes.getId();
     }
