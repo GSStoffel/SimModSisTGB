@@ -83,7 +83,7 @@ public class Entity {
         return "Id: " + this.id + " " + 
             "Name: " + this.name + " " + 
             "CreationTime: " + this.creationTime + " " +
-            "EndTime: " + this.creationTime + " " +
+            "EndTime: " + this.endTime + " " +
             "Priority: " + this.priority;
     }
 }

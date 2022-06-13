@@ -31,6 +31,7 @@ public class Restaurante extends DesEngine {
                 }
                 SystemLog.writeInFile("TAMANHO DA FILA: " + entitysets.toString());
                 SystemLog.writeInFile("RESOURCES: " + resources.toString());
+                SystemLog.writeInFile("ENTITIES: " + entities.toString());
             }
 
             time = minTime;
