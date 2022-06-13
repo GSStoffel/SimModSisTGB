@@ -38,8 +38,6 @@ public class SystemLog {
                 System.out.println();
             }
 
-
-
             bw.write(logText);
             bw.newLine();
 

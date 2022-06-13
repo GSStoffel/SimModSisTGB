@@ -32,9 +32,10 @@ public class Restaurante extends DesEngine {
                 }
                 SystemLog.writeInFile("TAMANHO DA FILA: " + entitysets.toString());
 
+
                 for (EntitySet fila:entitysets) {
-                    SystemLog.writeInFile("log_tempoex_"+fila.getName()+".txt",""+fila.averageTimeInSet(), false);
-                    SystemLog.writeInFile("log_tamanhoex_"+fila.getName()+".txt",""+fila.getSize(), false);
+                    SystemLog.writeInFile("./logs/tempo/log_tempoex_"+fila.getName()+".txt",""+fila.averageTimeInSet(), false);
+                    SystemLog.writeInFile("./logs/tamanho/log_tamanhoex_"+fila.getName()+".txt",""+fila.getSize(), false);
                 }
 
                 SystemLog.writeInFile("RESOURCES: " + resources.toString());
