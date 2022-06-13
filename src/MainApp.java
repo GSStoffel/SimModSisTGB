@@ -2,6 +2,7 @@ package src;
 
 import src.restaurante.Restaurante;
 import src.restaurante.process.Chegada;
+import src.restaurante.process.PagamentoPedido;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -37,15 +38,12 @@ public class MainApp {
 
         // PROCESSOS - Chegada
 
-//        int chegada = r.createProcess("Chegada1", r.exponential(3), new ArrayList<EntitySet>() {{
-//            add(r.getEntitySet(caixa1));
-//            add(r.getEntitySet(caixa2));
-//        }});
-
         int chegada = r.createProcess(new Chegada("chegada", r.exponential(3), new ArrayList<EntitySet>() {{
             add(r.getEntitySet(caixa1));
             add(r.getEntitySet(caixa2));
         }}));
+
+//        r.createProcess(new PagamentoPedido())
 
 //        int pagamentoPedido = r.createProcess("PagamentoPedido", r.normal(8,2), new ArrayList<EntitySet>() {{ add() }});
 

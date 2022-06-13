@@ -3,52 +3,52 @@ package src.restaurante.process;
 import src.Entity;
 import src.EntitySet;
 import src.Process;
+import src.Resource;
 import src.restaurante.entity.GrupoClientes;
-
-import java.util.List;
+import src.restaurante.entity.Pedido;
 
 public class PagamentoPedido extends Process {
 
-    public Entity entity;
-    private List<EntitySet> entitySetList;
+    private GrupoClientes grupoClientes;
+    private Resource atendenteCx;
+    private EntitySet filaCaixa;
+    private EntitySet filaCozinha;
+    private EntitySet filaBalcao;
+    private EntitySet filaMesa2;
+    private EntitySet filaMesa4;
 
-    public PagamentoPedido(String name, double duration, List<EntitySet> entitySetList) {
-        super(name, duration);
-        this.entitySetList = entitySetList;
+    public PagamentoPedido(int processId, String name, double duration, GrupoClientes grupoPessoas, Resource atendenteCx, EntitySet filaCaixa, EntitySet filaCozinha, EntitySet filaBalcao, EntitySet filaMesa2, EntitySet filaMesa4) {
+        super(processId, name, duration);
+        this.grupoClientes = grupoPessoas;
+        this.atendenteCx = atendenteCx;
+        this.filaCaixa = filaCaixa;
+        this.filaCozinha = filaCozinha;
+        this.filaBalcao = filaBalcao;
+        this.filaMesa2 = filaMesa2;
+        this.filaMesa4 = filaMesa4;
     }
 
     @Override
     public void executeOnStart() {
-        if (isCashierAvailable()) {
-            entity = new GrupoClientes("GrupoClientes");
+        boolean isAllocated = atendenteCx.allocate(1);
+        if (isAllocated) {
+            grupoClientes = (GrupoClientes) filaCaixa.remove();
         }
     }
 
     @Override
     public void executeOnEnd() {
-        if(entity != null) {
-            EntitySet entitySet = shortestQueue();
-            entitySet.getEntities().add(entity);
-        }
-    }
+        if (!filaCozinha.isFull()) {
+            filaCozinha.getEntities().add(new Pedido("Pedido"));
 
-    private EntitySet shortestQueue() {
-        EntitySet menorFila = entitySetList.get(0);
-        for (EntitySet es : entitySetList) {
-            if (es.getSize() < menorFila.getSize()) {
-                menorFila = es;
+            if (grupoClientes.getQuantity() == 1) {
+
+            } else if (grupoClientes.getQuantity() == 2) {
+
+            } else {
+
             }
         }
-        return menorFila;
-    }
-
-    private boolean isCashierAvailable() {
-        for (EntitySet es : entitySetList) {
-            if (!es.isFull()) {
-                return true;
-            }
-        }
-        return false;
     }
 }
 

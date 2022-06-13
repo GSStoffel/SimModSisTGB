@@ -107,8 +107,7 @@ public abstract class DesEngine {
     //  criacao e destruicao
 
     public Entity getEntity(int id){
-        for (Entity e :
-                entities) {
+        for (Entity e : entities) {
             if (e.getId() == id) {
                 return e;
             }
