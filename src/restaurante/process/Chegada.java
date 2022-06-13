@@ -23,8 +23,10 @@ public class Chegada extends Process {
     @Override
     public void executeOnStart() {
         if (isCashierAvailable()) {
-            restaurante.createEntity("GrupoClientes");
+            int grupoClientesId = restaurante.createEntity("GrupoClientes");
+            entity = restaurante.getEntity(grupoClientesId);
         }
+        super.executeOnStart();
     }
 
     @Override
@@ -33,6 +35,7 @@ public class Chegada extends Process {
             EntitySet entitySet = shortestQueue();
             entitySet.getEntities().add(entity);
         }
+        super.executeOnEnd();
     }
 
     private EntitySet shortestQueue() {

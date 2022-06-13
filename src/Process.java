@@ -5,6 +5,7 @@ public class Process {
     protected int processId;
     protected String name;
     protected double startTime;
+    protected double endTime;
     protected double duration;
     protected boolean active;
 
@@ -12,8 +13,8 @@ public class Process {
         this.processId = processId;
         this.name = name;
         this.duration = duration;
-        this.active = true;
         this.startTime = 0;
+        this.endTime = startTime+duration;
     }
 
     public Process(String name, double duration) {
@@ -36,28 +37,27 @@ public class Process {
     public void setActive(boolean active) {
         this.active = active;
     }
-    
+
     public void setStartTime(double startTime) {
         this.startTime = startTime;
     }
-    
+
     public double getStartTime() {
         return this.startTime;
     }
-    
+
     public double getEndTime() {
-        return this.startTime + this.duration;
+        return this.endTime;
     }
 
     public void executeOnStart() {
-
-        SystemLog.writeInFile("PROCESSO EXECUTADO NO INICIO: "+this.toString());
+        SystemLog.writeInFile("PROCESSO EXECUTADO NO INICIO: " + this.toString());
+        startTime = getEndTime();
     }
 
-    public void executeOnEnd(){
-        startTime += duration;
-
-        SystemLog.writeInFile("PROCESSO EXECUTADO NO FINAL: "+this.toString()+ " TEMPO INICIAL: "+startTime);
+    public void executeOnEnd() {
+        SystemLog.writeInFile("PROCESSO EXECUTADO NO FINAL: " + this.toString());
+        endTime += duration;
     }
 
     public int getProcessId() {
@@ -78,6 +78,7 @@ public class Process {
                 "processId=" + processId +
                 ", name='" + name + '\'' +
                 ", startTime=" + startTime +
+                ", endTime=" + endTime +
                 ", duration=" + duration +
                 ", active=" + active +
                 '}';

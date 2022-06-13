@@ -67,7 +67,11 @@ public abstract class DesEngine {
     }
 
     public double exponential(double meanValue){
-        return meanValue*Math.log(1-new Random().nextDouble());
+        double v = meanValue * Math.log(1 - new Random().nextDouble());
+        if (v<0){
+            v*=-1;
+        }
+        return v;
     }
 
     public double getTime() { return time; }

@@ -34,7 +34,7 @@ public class MainApp {
         int filaM2 = r.createEntitySet("filaM2", Mode.FIFO, 100);
         int filaM4 = r.createEntitySet("filaM4", Mode.FIFO, 100);
 
-        r.createEntitySet("pedidoEsperandoEntrega", Mode.FIFO, 100);
+        int pedidoEsperandoEntrega = r.createEntitySet("pedidoEsperandoEntrega", Mode.FIFO, 100);
 
         // PROCESSOS - Chegada
 
@@ -62,7 +62,7 @@ public class MainApp {
 //        int comendoM4 = r.createProcess("ComendoM2", r.exponential(3), new ArrayList<EntitySet>() {{
 //            add(r.getEntitySet(filaM4));
 //        }}, r.getResource(mesa4Id));
-
+        r.simulateUntil(300);
         r.simulate();
 
     }
