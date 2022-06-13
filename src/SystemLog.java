@@ -17,20 +17,28 @@ public class SystemLog {
         return formatter.format(date);
     }
 
-    public static void writeInFile(String textToWrite){
-        writeInFile(LOG_FILEPATH, textToWrite);
+    public static void writeInFileWithoutTime(String textToWrite){
+        writeInFile(LOG_FILEPATH, textToWrite, false);
     }
 
-    public static void writeInFile(String filepath, String textToWrite){
+    public static void writeInFile(String textToWrite){
+        writeInFile(LOG_FILEPATH, textToWrite, true);
+    }
+
+    public static void writeInFile(String filepath, String textToWrite, boolean hasTime){
         try {
             File fileOut = new File(filepath);
             FileOutputStream fos = new FileOutputStream(fileOut, true);
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
 
-            String logText = getCurrentTime()+" >>> "+textToWrite;
+            String logText = textToWrite;
+            if(hasTime){
+                logText = getCurrentTime()+" >>> "+textToWrite;
+                System.out.println(logText);
+                System.out.println();
+            }
 
-            System.out.println(logText);
-            System.out.println();
+
 
             bw.write(logText);
             bw.newLine();

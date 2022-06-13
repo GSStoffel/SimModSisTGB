@@ -15,6 +15,10 @@ public class EntitySet {
     protected int maxPossibleSize;
     protected List<Entity> entities;
 
+    public String getName() {
+        return name;
+    }
+
     public EntitySet(int id, String name, int mode, int maxPossibleSize) {
         this.id = id;
         this.name = name;
@@ -92,7 +96,6 @@ public class EntitySet {
         return entities.size() == maxPossibleSize;
     }
 
-    // TODO: impelementar. PS.: Perguntar pro professor
     public double averageSize() {
         return entities.size() / 2;
     }

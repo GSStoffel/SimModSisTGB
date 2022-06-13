@@ -13,6 +13,7 @@ public class Restaurante extends DesEngine {
     public void simulate() {
         while (time < maxTimeSimulate) {
             SystemLog.writeInFile("EXECUÇÃO NO TEMPO: " + time);
+            //SystemLog.writeInFile("log_tempoex.txt",""+time, false);
             double minTime = maxTimeSimulate;
             for (Process p : processes) {
                 if (p.getEndTime() == time){
@@ -30,6 +31,12 @@ public class Restaurante extends DesEngine {
                     minTime = p.getEndTime();
                 }
                 SystemLog.writeInFile("TAMANHO DA FILA: " + entitysets.toString());
+
+                for (EntitySet fila:entitysets) {
+                    SystemLog.writeInFile("log_tempoex_"+fila.getName()+".txt",""+fila.averageTimeInSet(), false);
+                    SystemLog.writeInFile("log_tamanhoex_"+fila.getName()+".txt",""+fila.getSize(), false);
+                }
+
                 SystemLog.writeInFile("RESOURCES: " + resources.toString());
                 SystemLog.writeInFile("ENTITIES: " + entities.toString());
             }
