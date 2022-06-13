@@ -41,20 +41,20 @@ public class PagamentoPedido extends Process {
         if (!filaCozinha.isFull()) {
             if (grupoClientes.getQuantity() == 1) {
                 if (!filaBalcao.isFull()) {
-                    filaCozinha.getEntities().add(new Pedido("Pedido"));
+                    filaCozinha.getEntities().add(new Pedido("Pedido", grupoClientes));
                     filaBalcao.getEntities().add(grupoClientes);
                 }
             } else if (grupoClientes.getQuantity() == 2) {
                 if (!filaMesa2.isFull()) {
-                    filaCozinha.getEntities().add(new Pedido("Pedido"));
+                    filaCozinha.getEntities().add(new Pedido("Pedido", grupoClientes));
                     filaMesa2.getEntities().add(grupoClientes);
                 } else if (!filaMesa4.isFull()) {
-                    filaCozinha.getEntities().add(new Pedido("Pedido"));
+                    filaCozinha.getEntities().add(new Pedido("Pedido", grupoClientes));
                     filaMesa4.getEntities().add(grupoClientes);
                 }
             } else {
                 if (!filaMesa4.isFull()) {
-                    filaCozinha.getEntities().add(new Pedido("Pedido"));
+                    filaCozinha.getEntities().add(new Pedido("Pedido", grupoClientes));
                     filaMesa4.getEntities().add(grupoClientes);
                 }
             }

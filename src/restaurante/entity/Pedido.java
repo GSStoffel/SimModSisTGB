@@ -4,8 +4,12 @@ import src.Entity;
 import src.PetriNet;
 
 public class Pedido extends Entity {
-    public Pedido(String name) {
+
+    private GrupoClientes grupoClientes;
+
+    public Pedido(String name, GrupoClientes grupoClientes) {
         super(name);
+        this.grupoClientes = grupoClientes;
     }
 
     public Pedido(String name, PetriNet petriNet) {

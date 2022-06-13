@@ -5,25 +5,22 @@ import src.Process;
 import src.Resource;
 
 public class Comendo extends Process {
-    private EntitySet fila;
+    private EntitySet filaPedidos;
+    private EntitySet filaLugar;
     private Resource resource;
 
-    public Comendo(int processId, String name, double duration, EntitySet fila, Resource resource) {
+    public Comendo(int processId, String name, double duration, EntitySet filaPedidos, EntitySet filaLugar, Resource resource) {
         super(processId, name, duration);
-        this.fila = fila;
+        this.filaPedidos = filaPedidos;
+        this.filaLugar = filaLugar;
         this.resource = resource;
     }
 
     @Override
     public void executeOnStart() {
-        boolean allocated = resource.allocate(1);
-        if (allocated) {
-            fila.remove();
-        }
     }
 
     @Override
     public void executeOnEnd() {
-        resource.release(1);
     }
 }
