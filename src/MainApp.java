@@ -44,12 +44,8 @@ public class MainApp {
         int pagamentoPedido1 = r.createProcess(new PagamentoPedido("pagamentoPedido1", r.normal(8, 2), r.getResource(atendenteCx1), r.getEntitySet(filaCaixa1), r.getEntitySet(filaCozinha), r.getEntitySet(filaBalcao), r.getEntitySet(filaM2), r.getEntitySet(filaM4)));
         int pagamentoPedido2 = r.createProcess(new PagamentoPedido("pagamentoPedido2", r.normal(8, 2), r.getResource(atendenteCx2), r.getEntitySet(filaCaixa2), r.getEntitySet(filaCozinha), r.getEntitySet(filaBalcao), r.getEntitySet(filaM2), r.getEntitySet(filaM4)));
 
-//        int chegadaPedidos = r.createProcess("ChegadaPedidos", r.exponential(3), new ArrayList<EntitySet>() {{
-//            add(r.getEntitySet(cozinha));
-//        }}, r.getResource(cozinheirosId));
-
 //        r.createProcess(new PreparandoPedido())
-
+        int preparandoPedido = r.createProcess(new PreparandoPedido("preparandoPedido", r.normal(14, 5), r.getResource(cozinheirosId), r.getEntitySet(filaCozinha), r.getEntitySet(pedidoEsperandoEntrega)));
 //
 //        // PROCESSOS - Comendo
 //

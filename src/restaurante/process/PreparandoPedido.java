@@ -1,9 +1,9 @@
 package src.restaurante.process;
 
+import src.Entity;
 import src.EntitySet;
 import src.Process;
 import src.Resource;
-import src.restaurante.entity.GrupoClientes;
 import src.restaurante.entity.Pedido;
 
 public class PreparandoPedido extends Process {
@@ -11,26 +11,32 @@ public class PreparandoPedido extends Process {
     private Pedido pedido;
     private Resource cozinheiros;
     private EntitySet filaCozinha;
-    private EntitySet filaPedidos;
+    private EntitySet filaPedidosEspera;
 
-    public PreparandoPedido(int processId, String name, double duration, Pedido pedido, Resource cozinheiros, EntitySet filaCozinha, EntitySet filaPedidos) {
-        super(processId, name, duration);
-        this.pedido = pedido;
+    public PreparandoPedido(String name, double duration, Resource cozinheiros, EntitySet filaCozinha, EntitySet filaPedidosEspera) {
+        super(name, duration);
         this.cozinheiros = cozinheiros;
         this.filaCozinha = filaCozinha;
-        this.filaPedidos = filaPedidos;
+        this.filaPedidosEspera = filaPedidosEspera;
     }
 
     @Override
     public void executeOnStart() {
         super.executeOnStart();
-
+        if (!filaCozinha.getEntities().isEmpty()){
+            boolean isAllocate = cozinheiros.allocate(1);
+            if (isAllocate){
+                pedido = (Pedido) filaCozinha.remove();
+            }
+        }
     }
 
     @Override
     public void executeOnEnd() {
         super.executeOnEnd();
-
-
+        if (!filaCozinha.isFull() && pedido != null) {
+            cozinheiros.release(1);
+            filaPedidosEspera.getEntities().add(pedido);
+        }
     }
 }
