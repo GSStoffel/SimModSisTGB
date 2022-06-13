@@ -72,17 +72,20 @@ public abstract class DesEngine {
 
     public void startProcessNow(int processId){
         Process process = getProcess(processId);
+        SystemLog.writeInFile("PROCESSO INICIADO: "+ process.toString());
         process.executeOnStart();
     }
 
     public  void startProcessIn(int processId, int timeToStart){
         Process process = getProcess(processId);
         process.setDuration(timeToStart);
+        SystemLog.writeInFile("PROCESSO INICIADO NO TEMPO: "+timeToStart+" | "+ process.toString());
     }
 
     public  void startProcessAt(int processId, int absoluteTime){
         Process process = getProcess(processId);
         process.setStartTime(absoluteTime);
+        SystemLog.writeInFile("PROCESSO NO TEMPO: "+absoluteTime+" | "+ process.toString());
     }
 
 //    public void waitFor(int time){}
@@ -118,18 +121,27 @@ public abstract class DesEngine {
 
     public int createEntity(Entity entity){
         entities.add(entity);
+
+        SystemLog.writeInFile("CRIANDO ENTIDADE: "+entity.toString());
+
         return entity.getId();
     }
 
     public Entity destroyEntity(int id){
         Entity removedEntity = getEntity(id);
         entities.remove(removedEntity);
+
+        SystemLog.writeInFile("REMOVENDO ENTIDADE: "+removedEntity.toString());
+
         return removedEntity;
     }
 
     public int createResource(String name, int quantity){
         Resource resource = new Resource(getMaxResourceId()+1, name, quantity);
         resources.add(resource);
+
+        SystemLog.writeInFile("CRIANDO RECURSO: "+resource.toString());
+
         return resource.getId();
     }
 
@@ -163,6 +175,9 @@ public abstract class DesEngine {
     public int createEntitySet(String name, int mode, int maxPossibleSize){
         EntitySet entitySet = new EntitySet(getMaxEntitySetId()+1, name, mode, maxPossibleSize);
         entitysets.add(entitySet);
+
+        SystemLog.writeInFile("CRIANDO FILA: "+entitySet.toString());
+
         return entitySet.getId();
     }
 
@@ -267,6 +282,9 @@ public abstract class DesEngine {
     public int createProcess(String name, double duration){
         Process process = new Process(getMaxProcessId()+1, name, duration);
         processes.add(process);
+
+        SystemLog.writeInFile("CRIANDO PROCESSO: "+process.toString());
+
         return process.getProcessId();
     }
 

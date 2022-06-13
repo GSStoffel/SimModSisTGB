@@ -11,7 +11,7 @@ public class EntitySet {
     private String name;
     private int id;
     private int mode;
-    private int size;
+    //private int size;
     private int maxPossibleSize;
     private List<Entity> entities;
 
@@ -33,7 +33,7 @@ public class EntitySet {
 
     private int getPriorityIndex() {
         int curIndex = 0;
-        for (int i = 1; i < size; i++) {
+        for (int i = 1; i < entities.size(); i++) {
             if (entities.get(i).getPriority() >= entities.get(curIndex).getPriority()) {
                 curIndex = i;
             }
@@ -46,7 +46,7 @@ public class EntitySet {
     }
 
     public Entity remove() {
-        if (size > 0) {
+        if (entities.size() > 0) {
             switch (mode) {
                 case Mode.FIFO -> {
                     return entities.remove(entities.size() - 1);
@@ -58,21 +58,19 @@ public class EntitySet {
                     return entities.remove(getPriorityIndex());
                 }
                 case Mode.NONE -> {
-                    return entities.remove(getRandomNumber(0, size));
+                    return entities.remove(getRandomNumber(0, entities.size()));
                 }
             }
-            this.size--;
         }
         return null;
     }
 
     private Entity removeById(int id) {
-        this.size--;
         return entities.remove(id);
     }
 
     public boolean isEmpty() {
-        return size > 0;
+        return entities.size() > 0;
     }
 
     public Entity findEntity(int id) {
@@ -80,16 +78,16 @@ public class EntitySet {
     }
 
     public boolean isFull() {
-        return size == maxPossibleSize;
+        return entities.size() == maxPossibleSize;
     }
 
     // TODO: impelementar. PS.: Perguntar pro professor
     public double averageSize() {
-        return size / 2;
+        return entities.size() / 2;
     }
 
     public int getSize() {
-        return size;
+        return entities.size();
     }
 
     public int getMaxPossibleSize() {
@@ -98,56 +96,39 @@ public class EntitySet {
 
     public double averageTimeInSet() {
         int timeAv = 0;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < entities.size(); i++) {
             timeAv += entities.get(i).getCreationTime();
         }
-        return timeAv / size;
+        return timeAv / entities.size();
     }
-
-    // TODO: implementar
 
     public double maxTimeInSet() {
         int timeAv = 0;
-        for (int i = 0; i < size; i++) {
+        for (int i = 0; i < entities.size(); i++) {
             timeAv += entities.get(i).getCreationTime() / 2;
         }
-        return timeAv / size;
+        return timeAv / entities.size();
     }
 
-    Map<Integer, Integer> log = new HashMap<>();
+    private List<LogPair> log = new ArrayList<>();
 
-    public void startLog(int timeGap) throws IOException {
-        // CSV
-        File fout = new File("log.csv");
-        FileOutputStream fos = new FileOutputStream(fout);
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-        Map<Integer, Integer> start_log = new HashMap<>();
-        for (int i = 0; i < size; i++) {
-            start_log.put((int) entities.get(i).getCreationTime(), getSize());
-            log.put((int) entities.get(i).getCreationTime(), getSize());
-            bw.write("START: " + start_log.toString());
-            bw.newLine();
+    public void startLog(int timeGap){
+        for (int i = 0; i < entities.size(); i++) {
+            LogPair logPair = new LogPair(entities.get(i).getCreationTime(), getSize());
+            log.add(logPair);
+            SystemLog.writeInFile("ENTITYSET START LOG: "+ logPair);
         }
-
-        bw.close();
     }
 
-    public void stopLog() throws IOException {
-        File fout = new File("stop_log.csv");
-        FileOutputStream fos = new FileOutputStream(fout);
-
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(fos));
-        Map<Integer, Integer> stop_log = new HashMap<>();
-        for (int i = 0; i < size; i++) {
-            stop_log.put((int) entities.get(i).getCreationTime(), getSize());
-            log.put((int) entities.get(i).getCreationTime(), getSize());
-            bw.write("STOP: " + stop_log.toString());
-            bw.newLine();
+    public void stopLog(){
+        for (int i = 0; i < entities.size(); i++) {
+            LogPair logPair = new LogPair(entities.get(i).getCreationTime(), getSize());
+            log.add(logPair);
+            SystemLog.writeInFile("ENTITYSET STOP LOG: "+ logPair);
         }
-        bw.close();
     }
 
-    public Map<Integer, Integer> getLog() {
+    public List<LogPair> getLog() {
         return log;
     }
 
@@ -157,5 +138,16 @@ public class EntitySet {
 
     public List<Entity> getEntities() {
         return entities;
+    }
+
+    @Override
+    public String toString() {
+        return "EntitySet{" +
+                "name='" + name + '\'' +
+                ", id=" + id +
+                ", mode=" + mode +
+                ", size=" + entities.size() +
+                ", maxPossibleSize=" + maxPossibleSize +
+                '}';
     }
 }
