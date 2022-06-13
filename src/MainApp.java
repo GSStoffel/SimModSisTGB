@@ -3,6 +3,7 @@ package src;
 import src.restaurante.Restaurante;
 import src.restaurante.process.Chegada;
 import src.restaurante.process.PagamentoPedido;
+import src.restaurante.process.PreparandoPedido;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -25,10 +26,10 @@ public class MainApp {
 
         // FILAS
 
-        int caixa1 = r.createEntitySet("caixa1", Mode.FIFO, 100);
-        int caixa2 = r.createEntitySet("caixa2", Mode.FIFO, 100);
+        int filaCaixa1 = r.createEntitySet("caixa1", Mode.FIFO, 100);
+        int filaCaixa2 = r.createEntitySet("caixa2", Mode.FIFO, 100);
 
-        int cozinha = r.createEntitySet("cozinha", Mode.FIFO, 100);
+        int filaCozinha = r.createEntitySet("cozinha", Mode.FIFO, 100);
 
         int filaBalcao = r.createEntitySet("filaBalcão", Mode.FIFO, 100);
         int filaM2 = r.createEntitySet("filaM2", Mode.FIFO, 100);
@@ -38,18 +39,17 @@ public class MainApp {
 
         // PROCESSOS - Chegada
 
-        int chegada = r.createProcess(new Chegada("chegada", r.exponential(3), new ArrayList<EntitySet>() {{
-            add(r.getEntitySet(caixa1));
-            add(r.getEntitySet(caixa2));
-        }}, r));
+        int chegada = r.createProcess(new Chegada("chegada", r.exponential(3), new ArrayList<EntitySet>() {{add(r.getEntitySet(filaCaixa1));add(r.getEntitySet(filaCaixa2));}}, r));
 
-//        r.createProcess(new PagamentoPedido())
-
-//        int pagamentoPedido = r.createProcess("PagamentoPedido", r.normal(8,2), new ArrayList<EntitySet>() {{ add() }});
+        int pagamentoPedido1 = r.createProcess(new PagamentoPedido("pagamentoPedido1", r.normal(8, 2), r.getResource(atendenteCx1), r.getEntitySet(filaCaixa1), r.getEntitySet(filaCozinha), r.getEntitySet(filaBalcao), r.getEntitySet(filaM2), r.getEntitySet(filaM4)));
+        int pagamentoPedido2 = r.createProcess(new PagamentoPedido("pagamentoPedido2", r.normal(8, 2), r.getResource(atendenteCx2), r.getEntitySet(filaCaixa2), r.getEntitySet(filaCozinha), r.getEntitySet(filaBalcao), r.getEntitySet(filaM2), r.getEntitySet(filaM4)));
 
 //        int chegadaPedidos = r.createProcess("ChegadaPedidos", r.exponential(3), new ArrayList<EntitySet>() {{
 //            add(r.getEntitySet(cozinha));
 //        }}, r.getResource(cozinheirosId));
+
+//        r.createProcess(new PreparandoPedido())
+
 //
 //        // PROCESSOS - Comendo
 //
@@ -62,6 +62,7 @@ public class MainApp {
 //        int comendoM4 = r.createProcess("ComendoM2", r.exponential(3), new ArrayList<EntitySet>() {{
 //            add(r.getEntitySet(filaM4));
 //        }}, r.getResource(mesa4Id));
+
         r.simulateUntil(300);
         r.simulate();
 

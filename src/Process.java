@@ -13,8 +13,9 @@ public class Process {
         this.processId = processId;
         this.name = name;
         this.duration = duration;
+        this.active = true;
         this.startTime = 0;
-        this.endTime = startTime+duration;
+        this.endTime = startTime + duration;
     }
 
     public Process(String name, double duration) {
@@ -52,7 +53,7 @@ public class Process {
 
     public void executeOnStart() {
         SystemLog.writeInFile("PROCESSO EXECUTADO NO INICIO: " + this.toString());
-        startTime = getEndTime();
+        startTime = endTime;
     }
 
     public void executeOnEnd() {

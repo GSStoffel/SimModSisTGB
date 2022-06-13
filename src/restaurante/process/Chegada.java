@@ -18,24 +18,26 @@ public class Chegada extends Process {
         this.entitySetList = entitySetList;
         this.restaurante = restaurante;
         this.active = true;
+        this.startTime = 0;
+        this.endTime = startTime + duration;
     }
 
     @Override
     public void executeOnStart() {
+        super.executeOnStart();
         if (isCashierAvailable()) {
             int grupoClientesId = restaurante.createEntity("GrupoClientes");
             entity = restaurante.getEntity(grupoClientesId);
         }
-        super.executeOnStart();
     }
 
     @Override
     public void executeOnEnd() {
-        if(entity != null) {
+        super.executeOnEnd();
+        if (entity != null) {
             EntitySet entitySet = shortestQueue();
             entitySet.getEntities().add(entity);
         }
-        super.executeOnEnd();
     }
 
     private EntitySet shortestQueue() {

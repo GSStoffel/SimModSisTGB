@@ -125,7 +125,7 @@ public abstract class DesEngine {
     }
 
     public int createEntity(String name){
-        GrupoClientes grupoClientes = new GrupoClientes(getMaxEntityId()+1, name);
+        GrupoClientes grupoClientes = new GrupoClientes((getMaxEntityId()+1), name);
 
         entities.add(grupoClientes);
 
@@ -235,7 +235,7 @@ public abstract class DesEngine {
             return 0;
         }
 
-        int id = 1;
+        int id = 0;
         for (Entity e : entities) {
             if(id < e.getId()) {
                 id = e.getId();

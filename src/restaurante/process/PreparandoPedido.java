@@ -23,11 +23,14 @@ public class PreparandoPedido extends Process {
 
     @Override
     public void executeOnStart() {
+        super.executeOnStart();
 
     }
 
     @Override
     public void executeOnEnd() {
+        super.executeOnEnd();
+
 
     }
 }

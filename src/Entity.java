@@ -1,12 +1,12 @@
 package src;
 
 public class Entity {
-    private String name;
-    private int id;
-    private double creationTime;
-    private double endTime;
-    private int priority;
-    private PetriNet petriNet;
+    protected String name;
+    protected int id;
+    protected double creationTime;
+    protected double endTime;
+    protected int priority;
+    protected PetriNet petriNet;
 
     public Entity(String name) {
         this.name = name;

@@ -17,28 +17,34 @@ public class PagamentoPedido extends Process {
     private EntitySet filaMesa2;
     private EntitySet filaMesa4;
 
-    public PagamentoPedido(int processId, String name, double duration, GrupoClientes grupoPessoas, Resource atendenteCx, EntitySet filaCaixa, EntitySet filaCozinha, EntitySet filaBalcao, EntitySet filaMesa2, EntitySet filaMesa4) {
-        super(processId, name, duration);
-        this.grupoClientes = grupoPessoas;
+    public PagamentoPedido(String name, double duration, Resource atendenteCx, EntitySet filaCaixa, EntitySet filaCozinha, EntitySet filaBalcao, EntitySet filaMesa2, EntitySet filaMesa4) {
+        super(name, duration);
         this.atendenteCx = atendenteCx;
         this.filaCaixa = filaCaixa;
         this.filaCozinha = filaCozinha;
         this.filaBalcao = filaBalcao;
         this.filaMesa2 = filaMesa2;
         this.filaMesa4 = filaMesa4;
+        this.active = true;
+        this.startTime = 0;
+        this.endTime = startTime + duration;
     }
 
     @Override
     public void executeOnStart() {
-        boolean isAllocated = atendenteCx.allocate(1);
-        if (isAllocated) {
-            grupoClientes = (GrupoClientes) filaCaixa.remove();
+        super.executeOnStart();
+        if (!filaCaixa.getEntities().isEmpty()) {
+            boolean isAllocated = atendenteCx.allocate(1);
+            if (isAllocated) {
+                grupoClientes = (GrupoClientes) filaCaixa.remove();
+            }
         }
     }
 
     @Override
     public void executeOnEnd() {
-        if (!filaCozinha.isFull()) {
+        super.executeOnEnd();
+        if (!filaCozinha.isFull() && grupoClientes != null) {
             if (grupoClientes.getQuantity() == 1) {
                 if (!filaBalcao.isFull()) {
                     filaCozinha.getEntities().add(new Pedido("Pedido", grupoClientes));

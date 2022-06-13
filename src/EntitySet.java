@@ -8,19 +8,19 @@ import java.util.Map;
 
 public class EntitySet {
 
-    private String name;
-    private int id;
-    private int mode;
+    protected String name;
+    protected int id;
+    protected int mode;
     //private int size;
-    private int maxPossibleSize;
-    private List<Entity> entities;
+    protected int maxPossibleSize;
+    protected List<Entity> entities;
 
     public EntitySet(int id, String name, int mode, int maxPossibleSize) {
         this.id = id;
         this.name = name;
         this.mode = mode;
         this.maxPossibleSize = maxPossibleSize;
-        this.entities = new ArrayList<>(maxPossibleSize);
+        this.entities = new ArrayList<Entity>(maxPossibleSize);
     }
 
     public int getMode() {

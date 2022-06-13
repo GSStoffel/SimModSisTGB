@@ -2,11 +2,11 @@ package src;
 
 public class Resource {
 
-    private int id;
-    private String name;
-    private int quantity;
-    private double totalTimeAllocated;
-    private int totalAllocation;
+    protected int id;
+    protected String name;
+    protected int quantity;
+    protected double totalTimeAllocated;
+    protected int totalAllocation;
 
     public Resource(int id, String name, int quantity) {
         this.id = id;
@@ -17,7 +17,7 @@ public class Resource {
     }
 
     public boolean allocate(int quantity) {
-        if (quantity < this.quantity) {
+        if (quantity <= this.quantity) {
             this.quantity -= quantity;
             this.totalAllocation++;
             return true;
