@@ -58,4 +58,15 @@ public class Resource {
     public void setTotalAllocation(int totalAllocation) {
         this.totalAllocation = totalAllocation;
     }
+
+    @Override
+    public String toString() {
+        return "Resource{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", quantity=" + quantity +
+                ", totalTimeAllocated=" + totalTimeAllocated +
+                ", totalAllocation=" + totalAllocation +
+                '}';
+    }
 }

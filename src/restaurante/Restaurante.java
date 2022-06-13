@@ -29,6 +29,7 @@ public class Restaurante extends DesEngine {
     public int createProcess(Chegada chegada) {
         chegada.setProcessId(getMaxProcessId()+1);
         processes.add(chegada);
+        SystemLog.writeInFile("CRIANDO PROCESSO DE CHEGADA: "+chegada.toString());
         return chegada.getProcessId();
     }
 }

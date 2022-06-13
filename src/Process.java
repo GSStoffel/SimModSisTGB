@@ -47,10 +47,15 @@ public class Process {
         return this.startTime + this.duration;
     }
 
-    public void executeOnStart() {}
+    public void executeOnStart() {
+
+        SystemLog.writeInFile("PROCESSO EXECUTADO NO INICIO: "+this.toString());
+    }
 
     public void executeOnEnd(){
         startTime += duration;
+
+        SystemLog.writeInFile("PROCESSO EXECUTADO NO FINAL: "+this.toString()+ " TEMPO INICIAL: "+startTime);
     }
 
     public int getProcessId() {
@@ -63,5 +68,16 @@ public class Process {
 
     public void setProcessId(int processId) {
         this.processId = processId;
+    }
+
+    @Override
+    public String toString() {
+        return "Process{" +
+                "processId=" + processId +
+                ", name='" + name + '\'' +
+                ", startTime=" + startTime +
+                ", duration=" + duration +
+                ", active=" + active +
+                '}';
     }
 }

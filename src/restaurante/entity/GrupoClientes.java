@@ -9,7 +9,7 @@ public class GrupoClientes extends Entity {
 
     private int quantity;
 
-    public GrupoClientes(String name) {
+    public GrupoClientes(int id, String name) {
         super(name);
         this.quantity = new Random().nextInt(4)+1;
     }

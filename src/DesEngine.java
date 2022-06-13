@@ -1,5 +1,7 @@
 package src;
 
+import src.restaurante.entity.GrupoClientes;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
@@ -72,17 +74,20 @@ public abstract class DesEngine {
 
     public void startProcessNow(int processId){
         Process process = getProcess(processId);
+        SystemLog.writeInFile("PROCESSO INICIADO: "+ process.toString());
         process.executeOnStart();
     }
 
     public  void startProcessIn(int processId, int timeToStart){
         Process process = getProcess(processId);
         process.setDuration(timeToStart);
+        SystemLog.writeInFile("PROCESSO INICIADO NO TEMPO: "+timeToStart+" | "+ process.toString());
     }
 
     public  void startProcessAt(int processId, int absoluteTime){
         Process process = getProcess(processId);
         process.setStartTime(absoluteTime);
+        SystemLog.writeInFile("PROCESSO NO TEMPO: "+absoluteTime+" | "+ process.toString());
     }
 
 //    public void waitFor(int time){}
@@ -115,20 +120,31 @@ public abstract class DesEngine {
         return null;
     }
 
-    public int createEntity(Entity entity){
-        entities.add(entity);
-        return entity.getId();
+    public int createEntity(String name){
+        GrupoClientes grupoClientes = new GrupoClientes(getMaxEntityId()+1, name);
+
+        entities.add(grupoClientes);
+
+        SystemLog.writeInFile("CRIANDO ENTIDADE: "+grupoClientes.toString());
+
+        return grupoClientes.getId();
     }
 
     public Entity destroyEntity(int id){
         Entity removedEntity = getEntity(id);
         entities.remove(removedEntity);
+
+        SystemLog.writeInFile("REMOVENDO ENTIDADE: "+removedEntity.toString());
+
         return removedEntity;
     }
 
     public int createResource(String name, int quantity){
         Resource resource = new Resource(getMaxResourceId()+1, name, quantity);
         resources.add(resource);
+
+        SystemLog.writeInFile("CRIANDO RECURSO: "+resource.toString());
+
         return resource.getId();
     }
 
@@ -162,6 +178,9 @@ public abstract class DesEngine {
     public int createEntitySet(String name, int mode, int maxPossibleSize){
         EntitySet entitySet = new EntitySet(getMaxEntitySetId()+1, name, mode, maxPossibleSize);
         entitysets.add(entitySet);
+
+        SystemLog.writeInFile("CRIANDO FILA: "+entitySet.toString());
+
         return entitySet.getId();
     }
 
@@ -202,6 +221,20 @@ public abstract class DesEngine {
         for (EntitySet es : entitysets) {
             if(id < es.getId()) {
                 id = es.getId();
+            }
+        }
+        return id;
+    }
+
+    private int getMaxEntityId() {
+        if(entities.isEmpty()) {
+            return 0;
+        }
+
+        int id = 1;
+        for (Entity e : entities) {
+            if(id < e.getId()) {
+                id = e.getId();
             }
         }
         return id;
@@ -266,6 +299,9 @@ public abstract class DesEngine {
     public int createProcess(String name, double duration){
         Process process = new Process(getMaxProcessId()+1, name, duration);
         processes.add(process);
+
+        SystemLog.writeInFile("CRIANDO PROCESSO: "+process.toString());
+
         return process.getProcessId();
     }
 

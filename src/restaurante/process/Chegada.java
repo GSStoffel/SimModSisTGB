@@ -3,27 +3,26 @@ package src.restaurante.process;
 import src.Entity;
 import src.EntitySet;
 import src.Process;
-import src.Resource;
 import src.restaurante.Restaurante;
-import src.restaurante.entity.GrupoClientes;
-import src.restaurante.entityset.Fila;
 
 import java.util.List;
 
 public class Chegada extends Process {
 
     public Entity entity;
+    private Restaurante restaurante;
     private List<EntitySet> entitySetList;
 
-    public Chegada(String name, double duration, List<EntitySet> entitySetList) {
+    public Chegada(String name, double duration, List<EntitySet> entitySetList, Restaurante restaurante) {
         super(name, duration);
         this.entitySetList = entitySetList;
+        this.restaurante = restaurante;
     }
 
     @Override
     public void executeOnStart() {
         if (isCashierAvailable()) {
-            entity = new GrupoClientes("GrupoClientes");
+            restaurante.createEntity("GrupoClientes");
         }
     }
 

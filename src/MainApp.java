@@ -41,7 +41,7 @@ public class MainApp {
         int chegada = r.createProcess(new Chegada("chegada", r.exponential(3), new ArrayList<EntitySet>() {{
             add(r.getEntitySet(caixa1));
             add(r.getEntitySet(caixa2));
-        }}));
+        }}, r));
 
 //        r.createProcess(new PagamentoPedido())
 

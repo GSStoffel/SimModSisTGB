@@ -30,6 +30,14 @@ public class Entity {
         this.priority = priority;
     }
 
+    public Entity(String name, int id, double creationTime, double endTime, int priority) {
+        this.name = name;
+        this.id = id;
+        this.creationTime = creationTime;
+        this.endTime = endTime;
+        this.priority = priority;
+    }
+
     public String getName() {
         return name;
     }

@@ -39,14 +39,24 @@ public class PagamentoPedido extends Process {
     @Override
     public void executeOnEnd() {
         if (!filaCozinha.isFull()) {
-            filaCozinha.getEntities().add(new Pedido("Pedido"));
-
             if (grupoClientes.getQuantity() == 1) {
-
+                if (!filaBalcao.isFull()) {
+                    filaCozinha.getEntities().add(new Pedido("Pedido"));
+                    filaBalcao.getEntities().add(grupoClientes);
+                }
             } else if (grupoClientes.getQuantity() == 2) {
-
+                if (!filaMesa2.isFull()) {
+                    filaCozinha.getEntities().add(new Pedido("Pedido"));
+                    filaMesa2.getEntities().add(grupoClientes);
+                } else if (!filaMesa4.isFull()) {
+                    filaCozinha.getEntities().add(new Pedido("Pedido"));
+                    filaMesa4.getEntities().add(grupoClientes);
+                }
             } else {
-
+                if (!filaMesa4.isFull()) {
+                    filaCozinha.getEntities().add(new Pedido("Pedido"));
+                    filaMesa4.getEntities().add(grupoClientes);
+                }
             }
         }
     }
