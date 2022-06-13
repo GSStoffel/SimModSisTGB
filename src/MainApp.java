@@ -65,5 +65,7 @@ public class MainApp {
 
         r.simulate();
 
+        new StatisticsRestaurante(r).getStatistics();
+
     }
 }
